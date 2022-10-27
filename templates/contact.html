@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2 js-fullheight"
+         style="background-image:url(images/xbg_1.jpg.pagespeed.ic.7wX3e-PeJV.jpg)" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <h1 class="mb-3 bread">Contact us</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index-2.html">Home <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span>About <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-12 mb-4">
+                <h2 class="h3">Contact Information</h2>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-3">
+                <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+            </div>
+            <div class="col-md-3">
+                <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><span>Email:</span> <a
+                        href="https://preview.colorlib.com/cdn-cgi/l/email-protection#d9b0b7bfb699a0b6acabaab0adbcf7bab6b4"><span
+                        class="__cf_email__"
+                        data-cfemail="a8c1c6cec7e8d1c7dddadbc1dccd86cbc7c5">[email&#160;protected]</span></a></p>
+            </div>
+            <div class="col-md-3">
+                <p><span>Website</span> <a href="#">yoursite.com</a></p>
+            </div>
+        </div>
+        <div class="row block-9 no-gutters">
+            <div class="col-lg-6 order-md-last d-flex">
+                <form method="post" class="bg-light p-4 p-md-5 contact-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+{#                        <input type="text" class="form-control" placeholder="Your Name">#}
+                            {{ form.name }}
+                    </div>
+                    <div class="form-group">
+{#                        <input type="text" class="form-control" placeholder="Your Email">#}
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+{#                        <input type="text" class="form-control" placeholder="Subject">#}
+                        {{ form.subject }}
+                    </div>
+                    <div class="form-group">
+{#                        <textarea name="" id="" cols="30" rows="7" class="form-control"#}
+{#                                  placeholder="Message"></textarea>#}
+                        {{ form.message }}
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 d-flex">
+                <div id="map" class="bg-white"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

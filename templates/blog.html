@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load params_tags %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+    <div class="hero-wrap js-fullheight"
+         style="background-image:url({% static 'images/xbg_1.jpg.pagespeed.ic.7wX3e-PeJV.jpg' %})"
+         data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
+                 data-scrollax-parent="true">
+                <div class="col-md-12 ftco-animate">
+                    <h2 class="subheading">Hello! Welcome to</h2>
+
+                    <h1 class="mb-4 mb-md-0">Readit blog</h1>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="text">
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and
+                                    Consonantia,
+                                    there live the blind texts. Separated they live in Bookmarksgrove right at the coast
+                                    of
+                                    the Semantics, a large language ocean.</p>
+                                <div class="mouse">
+                                    <a href="#" class="mouse-icon">
+                                        <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row d-flex">
+                {% for object in page_obj %}
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end">
+                            <a href="{% url 'articles:single' object.id %}" class="block-20"
+                               style="background-image:url({{ object.image.url }})">
+                            </a>
+                            <div class="text p-4 float-right d-block">
+                                <div class="topper d-flex align-items-center">
+                                    <div class="one py-2 pl-3 pr-1 align-self-stretch">
+                                        <span class="day">{{ object.created_at.day }}</span>
+                                    </div>
+                                    <div class="two pl-0 pr-3 py-2 align-self-stretch">
+                                        <span class="yr">{{ object.created_at.year }}</span>
+                                        <span class="mos">{{ object.created_at|date:"F" }}</span>
+                                    </div>
+                                </div>
+                                <h3 class="heading mb-3"><a
+                                        href="{% url 'articles:single' object.id %}">{{ object.title }}</a></h3>
+                                <p>{{ object.context|truncatechars:"100" }}</p>
+                                <p><a href="{% url 'articles:single' object.id %}" class="btn-custom"><span
+                                        class="ion-ios-arrow-round-forward mr-3"></span>Read
+                                    more</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        {% if page_obj.has_other_pages %}
+                            <ul>
+                                {% if page_obj.has_previous %}
+{#                                    <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>#}
+                                    <li><a href="?{% url_replace page=page_obj.previous_page_number %}">&lt;</a></li>
+                                {% endif %}
+                                {% for i in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                        <li class="active"><span>{{ i }}</span></li>
+                                    {% else %}
+{#                                        <li><a href="?page={{ i }}">{{ i }}</a></li>#}
+                                        <li><a href="?{% url_replace page=i %}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+{#                                    <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>#}
+                                    <li><a href="?{% url_replace page=page_obj.next_page_number %}">&gt;</a></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
